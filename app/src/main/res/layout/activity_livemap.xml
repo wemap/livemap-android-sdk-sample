@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:wemap="http://schemas.android.com/apk/res-auto"
+    tools:context=".LivemapSampleActivity">
+
+    <com.getwemap.livemap.sdk.LivemapView
+        android:id="@+id/livemap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        wemap:emmid="12670"
+        wemap:token="YA94J9C4C2P1DZQSTRW7YIJVV"/>
+
+</merge>
