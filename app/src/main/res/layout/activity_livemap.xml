@@ -4,11 +4,11 @@
     xmlns:wemap="http://schemas.android.com/apk/res-auto"
     tools:context=".LivemapSampleActivity">
 
-    <com.getwemap.livemap.sdk.LivemapView
+    <com.getwemap.livemap.sdkrg.LivemapRGView
         android:id="@+id/livemap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        wemap:emmid="12670"
-        wemap:token="YA94J9C4C2P1DZQSTRW7YIJVV"/>
+        wemap:emmid="13305"
+        wemap:token="7ETI43N4ZZGARWPHJ57WQAARW" />
 
 </merge>

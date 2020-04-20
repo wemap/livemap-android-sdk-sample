@@ -1,40 +1,33 @@
 package com.getwemap.livemap.sdk.sample;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.getwemap.livemap.sdk.Livemap;
-import com.getwemap.livemap.sdk.LivemapView;
-import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
-import com.getwemap.livemap.sdk.model.Filters;
 import com.getwemap.livemap.sdk.model.LatLngAlt;
+import com.getwemap.livemap.sdkrg.LivemapRGView;
+import com.getwemap.livemap.sdkrg.OnLivemapRGReadyCallback;
+import com.getwemap.livemap.sdkrg.RGInterface;
 
-public class LivemapSampleActivity extends AppCompatActivity implements OnLivemapReadyCallback {
+public class LivemapSampleActivity extends Activity implements OnLivemapRGReadyCallback {
 
-    enum Sample {
-        Map,
-        PinpointEvent,
-        Navigation
-    }
-
-    private final static String TAG = "WEMAP-TAG";
-    private final static Sample sample = Sample.PinpointEvent;
-
-    private LivemapView mLivemapView;
-
+    private LivemapRGView mLivemapView;
+    protected Logger mLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLogger = new Logger(this);
 
         setContentView(R.layout.activity_livemap);
 
         mLivemapView = findViewById(R.id.livemap);
-        mLivemapView.getLivemapAsync(this);
+        mLivemapView.getLivemapRGAsync(this);
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -44,25 +37,30 @@ public class LivemapSampleActivity extends AppCompatActivity implements OnLivema
     }
 
     @Override
-    public void onLivemapReady(Livemap livemap) {
+    public void onLivemapRGReady(Livemap livemap, RGInterface rgInterface) {
 
-        if (sample == Sample.Map) {
-            livemap.centerTo(new LatLngAlt(48.8, 2.3), 10);
-        }
-        else if(sample == Sample.PinpointEvent) {
-            livemap.addPinpointOpenListener((pinpoint) -> Log.v(TAG, "Pinpoint open: " + pinpoint.toString()));
-            livemap.addPinpointCloseListener(() -> Log.v(TAG, "Pinpoint close"));
+        /*
+         * Workaround because centerTo does not work after waitForReady
+         * @see https://getwemap.atlassian.net/browse/WEEMM-1915
+         */
+        new Handler().postDelayed(() -> {
+            livemap.centerTo(new LatLngAlt(48.8471, 2.2486), 17);
+            mLogger.log("Centered map to: 48.8471, 2.2486");
+        }, 500);
 
-            livemap.addEventOpenListener((event) -> Log.v(TAG, "Event open: " + event.toString()));
-            livemap.addEventCloseListener(() -> Log.v(TAG, "Event close"));
+        livemap.addPinpointOpenListener(pinpoint -> mLogger.log("Pinpoint open: " + pinpoint.getId()));
+        livemap.addPinpointCloseListener(() -> mLogger.log("Pinpoint close"));
 
-            livemap.setFilters(new Filters("2019-09-21", "2019-09-22", "", new String[]{}));
-        }
-        else if (sample == Sample.Navigation) {
-            livemap.navigateToPinpoint(26347232);
-            livemap.addGuidingStartedListener(() -> Log.v(TAG, "Guiding started"));
-            livemap.addGuidingStoppedListener(() -> Log.v(TAG, "Guiding stopped"));
-        }
+        livemap.addEventOpenListener(event -> mLogger.log("Event open: " + event.getId()));
+        livemap.addEventCloseListener(() -> mLogger.log("Event close"));
+
+        livemap.addGuidingStartedListener(() -> mLogger.log("Guiding started"));
+        livemap.addGuidingStoppedListener(() -> mLogger.log("Guiding stopped"));
+
+        rgInterface.addBookEventClickedListener((eventId) -> mLogger.log("BookEvent clicked: " + eventId));
+        rgInterface.addGoToPinpointClickedListener((pinpointId) -> mLogger.log("GoTo Pinpoint clicked: " + pinpointId));
+
+        // livemap.navigateToPinpoint(31604315);
 
     }
 }
