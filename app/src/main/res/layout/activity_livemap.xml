@@ -8,7 +8,7 @@
         android:id="@+id/livemap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        wemap:emmid="13305"
+        wemap:emmid="12606"
         wemap:token="7ETI43N4ZZGARWPHJ57WQAARW" />
 
 </merge>

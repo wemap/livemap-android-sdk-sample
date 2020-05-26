@@ -12,6 +12,8 @@ import com.getwemap.livemap.sdkrg.LivemapRGView;
 import com.getwemap.livemap.sdkrg.OnLivemapRGReadyCallback;
 import com.getwemap.livemap.sdkrg.RGInterface;
 
+import org.json.JSONException;
+
 public class LivemapSampleActivity extends Activity implements OnLivemapRGReadyCallback {
 
     private LivemapRGView mLivemapView;
@@ -48,7 +50,15 @@ public class LivemapSampleActivity extends Activity implements OnLivemapRGReadyC
             mLogger.log("Centered map to: 48.8471, 2.2486");
         }, 500);
 
-        livemap.addPinpointOpenListener(pinpoint -> mLogger.log("Pinpoint open: " + pinpoint.getId()));
+        livemap.addPinpointOpenListener(pinpoint -> {
+            mLogger.log("Pinpoint open: " + pinpoint.getId());
+            try {
+                if (pinpoint.getExternalData().has("prismic_id")) {
+                    mLogger.log("Prismic id: " + pinpoint.getExternalData().getString("prismic_id"));
+                }
+            } catch (JSONException ignored) {
+            }
+        });
         livemap.addPinpointCloseListener(() -> mLogger.log("Pinpoint close"));
 
         livemap.addEventOpenListener(event -> mLogger.log("Event open: " + event.getId()));
