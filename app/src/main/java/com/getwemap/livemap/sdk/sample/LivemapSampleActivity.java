@@ -67,8 +67,8 @@ public class LivemapSampleActivity extends Activity implements OnLivemapRGReadyC
         livemap.addGuidingStartedListener(() -> mLogger.log("Guiding started"));
         livemap.addGuidingStoppedListener(() -> mLogger.log("Guiding stopped"));
 
-        rgInterface.addBookEventClickedListener((eventId) -> mLogger.log("BookEvent clicked: " + eventId));
-        rgInterface.addGoToPinpointClickedListener((pinpointId) -> mLogger.log("GoTo Pinpoint clicked: " + pinpointId));
+        rgInterface.addBookEventClickedListener((event) -> mLogger.log("BookEvent clicked: " + event.getId()));
+        rgInterface.addGoToPinpointClickedListener((pinpoint) -> mLogger.log("GoTo Pinpoint clicked: " + pinpoint.getId()));
 
         // livemap.navigateToPinpoint(31604315);
 
