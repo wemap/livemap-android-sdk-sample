@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['livemap-sdk.aar', 'livemap-sdk-rg.aar'])
+    implementation fileTree(dir: 'libs', include: ['commons.aar', 'livemap-sdk.aar', 'livemap-sdk-rg.aar', 'providers.aar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
 }
