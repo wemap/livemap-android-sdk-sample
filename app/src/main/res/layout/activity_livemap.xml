@@ -4,11 +4,41 @@
     xmlns:wemap="http://schemas.android.com/apk/res-auto"
     tools:context=".LivemapSampleActivity">
 
-    <com.getwemap.livemap.sdk.LivemapView
-        android:id="@+id/livemap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        wemap:emmid="19158"
-        wemap:token="GUHTU6TYAWWQHUSR5Z5JZNMXX" />
+    <!--
+    The old example
+        <com.getwemap.livemap.sdk.LivemapView
+            android:id="@+id/livemap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            wemap:emmid="19158"
+            wemap:token="GUHTU6TYAWWQHUSR5Z5JZNMXX" />
+    -->
+
+    <!--
+    Use this without a token to test the maxbounds parameter:
+
+        <com.getwemap.livemap.sdk.LivemapView
+            android:id="@+id/livemap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            wemap:emmid="19158"
+            wemap:maxboundsEast="13.37477"
+            wemap:maxboundsNorth="52.526714"
+            wemap:maxboundsSouth="52.522667"
+            wemap:maxboundsWest="13.364878"
+            wemap:token=""
+        />
+    -->
+
+    <!--
+    Use this without a token to test the setSourceLists function:
+    -->
+      <com.getwemap.livemap.sdk.LivemapView
+          android:id="@+id/livemap"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          wemap:emmid="19158"
+          wemap:token=""
+      />
 
 </merge>
