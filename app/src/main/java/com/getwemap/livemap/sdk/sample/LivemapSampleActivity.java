@@ -9,6 +9,8 @@ import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
 
+import java.util.ArrayList;
+
 public class LivemapSampleActivity extends Activity implements OnLivemapReadyCallback {
 
     private LivemapView mLivemapView;
@@ -46,6 +48,17 @@ public class LivemapSampleActivity extends Activity implements OnLivemapReadyCal
         livemap.addGuidingStoppedListener(() -> mLogger.log("Guiding stopped"));
 
         // livemap.navigateToPinpoint(31604315);
+
+        // add 2 points in Montpellier
+        ArrayList<Integer> sourceLists = new ArrayList<Integer>();
+        sourceLists.add(74878);
+        livemap.setSourceLists(sourceLists);
+
+        livemap.addMapClickListener(point -> mLogger.log("Map click: " + point.toString()));
+        livemap.addMapLongClickListener(point -> mLogger.log("Map long click: " + point.toString()));
+        livemap.addMapMovedListener(mapMoved -> {
+            mLogger.log("Map moved: " + mapMoved.toString());
+        });
     }
 }
 
