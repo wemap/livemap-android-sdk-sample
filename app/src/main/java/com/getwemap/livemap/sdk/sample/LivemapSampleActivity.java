@@ -49,6 +49,8 @@ public class LivemapSampleActivity extends Activity implements OnLivemapReadyCal
 
         // livemap.navigateToPinpoint(31604315);
 
+        livemap.aroundMe();
+
         // add 2 points in Montpellier
         ArrayList<Integer> sourceLists = new ArrayList<Integer>();
         sourceLists.add(74878);
