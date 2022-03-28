@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         wemap:emmid="12606"
-        wemap:token="7ETI43N4ZZGARWPHJ57WQAARW" />
+        wemap:token="7ETI43N4ZZGARWPHJ57WQAARW"
+        wemap:introcardActive="false" />
 
 </merge>

@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapOptions;
-import com.getwemap.livemap.sdk.model.LatLngAlt;
+import com.getwemap.livemap.sdk.callbacks.ActionButtonClickListener;
+import com.getwemap.livemap.sdk.model.Event;
+import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.getwemap.livemap.sdkrg.LivemapRGView;
 import com.getwemap.livemap.sdkrg.OnLivemapRGReadyCallback;
 import com.getwemap.livemap.sdkrg.RGInterface;
-
-import org.json.JSONException;
 
 public class LivemapProgrammaticalySampleActivity extends Activity implements OnLivemapRGReadyCallback {
 
@@ -28,6 +28,7 @@ public class LivemapProgrammaticalySampleActivity extends Activity implements On
         LivemapOptions livemapOptions = new LivemapOptions();
         livemapOptions.emmid = 12606;
         livemapOptions.token = "7ETI43N4ZZGARWPHJ57WQAARW";
+        livemapOptions.introcardActive = false;
 
         mLivemapView = new LivemapRGView(this, livemapOptions);
         mLivemapView.getLivemapRGAsync(this);
@@ -46,36 +47,24 @@ public class LivemapProgrammaticalySampleActivity extends Activity implements On
     @Override
     public void onLivemapRGReady(Livemap livemap, RGInterface rgInterface) {
 
-        /*
-         * Workaround because centerTo does not work after waitForReady
-         * @see https://getwemap.atlassian.net/browse/WEEMM-1915
-         */
-        new Handler().postDelayed(() -> {
-            livemap.centerTo(new LatLngAlt(48.8471, 2.2486), 17);
-            mLogger.log("Centered map to: 48.8471, 2.2486");
-        }, 500);
+        rgInterface.addBookEventClickedListener((event) -> mLogger.log("BookEvent clicked: " + event.getId()));
 
-        livemap.addPinpointOpenListener(pinpoint -> {
-            mLogger.log("Pinpoint open: " + pinpoint.getId());
-            try {
-                if (pinpoint.getExternalData().has("prismic_id")) {
-                    mLogger.log("Prismic id: " + pinpoint.getExternalData().getString("prismic_id"));
+        livemap.addActionButtonClickedListener(new ActionButtonClickListener() {
+            @Override
+            public void onPinpointActionClicked(Pinpoint pinpoint, String actionName) {
+                if (actionName.equals(ActionName.DIRECTIONS.toString())) {
+                    mLogger.log("GoTo Pinpoint clicked: " + pinpoint.getId());
                 }
-            } catch (JSONException ignored) {
+            }
+
+            @Override
+            public void onEventActionClicked(Event event, String actionName) {
+                // Do nothing
             }
         });
-        livemap.addPinpointCloseListener(() -> mLogger.log("Pinpoint close"));
 
-        livemap.addEventOpenListener(event -> mLogger.log("Event open: " + event.getId()));
-        livemap.addEventCloseListener(() -> mLogger.log("Event close"));
-
-        livemap.addGuidingStartedListener(() -> mLogger.log("Guiding started"));
-        livemap.addGuidingStoppedListener(() -> mLogger.log("Guiding stopped"));
-
-        rgInterface.addBookEventClickedListener((event) -> mLogger.log("BookEvent clicked: " + event.getId()));
-        rgInterface.addGoToPinpointClickedListener((pinpoint) -> mLogger.log("GoTo Pinpoint clicked: " + pinpoint.getId()));
-
-        // livemap.navigateToPinpoint(31604315);
+        livemap.enableAnalytics();
+        new Handler().postDelayed(livemap::disableAnalytics, 10000);
 
     }
 }
