@@ -13,11 +13,10 @@ import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
 import com.getwemap.livemap.sdk.model.LatLngAlt;
 import com.getwemap.livemap.sdk.model.PolylineOptions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class OtherSdkMethodsActivity extends Activity implements OnLivemapReadyCallback {
+public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCallback {
 
     private LivemapView mLivemapView;
     private Logger mLogger;
@@ -47,7 +46,7 @@ public class OtherSdkMethodsActivity extends Activity implements OnLivemapReadyC
 
     @Override
     public void onLivemapReady(Livemap livemap) {
-        
+
         // Center the map to a specific location and zoom
         new Handler().postDelayed(() -> livemap.centerTo(
                 new LatLngAlt(43.609395, 3.884215), 5),
@@ -62,6 +61,7 @@ public class OtherSdkMethodsActivity extends Activity implements OnLivemapReadyC
 
         // Navigation
         livemap.addGuidingStartedListener(() -> mLogger.log("Guiding started"));
+        livemap.addGuidingUpdatedListener(r -> mLogger.log("Guiding update: remaining " + r + " m"));
         livemap.addGuidingStoppedListener(() -> mLogger.log("Guiding stopped"));
         new Handler().postDelayed(() -> livemap.navigateToPinpoint(35090408), 12000);
         new Handler().postDelayed(livemap::stopNavigation, 22000);
@@ -98,6 +98,23 @@ public class OtherSdkMethodsActivity extends Activity implements OnLivemapReadyC
         // // User sign in / sign out
         // livemap.signInByToken("myToken");
         // livemap.signOut();
+
+        // // Find the nearest pinpoints from a point.
+        // livemap.findNearestPinpoints(
+        //         new LatLngAlt(45, 4),
+        //         pinpoints -> mLogger.log("Nearest pinpoints: " + Arrays.toString(pinpoints))
+        // );
+
+        // livemap.getCenter(center -> mLogger.log("Center: " + center));
+        // livemap.getZoom(zoom -> mLogger.log("Zoom: " + zoom));
+
+        // livemap.openList(1234);
+        // livemap.closeList();
+
+        // livemap.closePopin();
+
+        // // Fit the map on given bounds.
+        // livemap.fitBounds(new BoundingBox(0, 43, 10, 48));
 
     }
 }

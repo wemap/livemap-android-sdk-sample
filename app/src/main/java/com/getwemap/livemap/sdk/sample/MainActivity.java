@@ -18,8 +18,8 @@ public class MainActivity extends Activity {
     private final static ActivityNamed[] ACTIVITIES = new ActivityNamed[]{
             new ActivityNamed("Hello World", HelloWorldActivity.class),
             new ActivityNamed("Hello World Programmatically", ProgrammaticallyViewActivity.class),
-            new ActivityNamed("Events", EventsActivity.class),
-            new ActivityNamed("Other SDK Methods", OtherSdkMethodsActivity.class),
+            new ActivityNamed("Livemap Methods", LivemapMethodsActivity.class),
+            new ActivityNamed("Livemap Events", LivemapEventsActivity.class),
     };
 
 

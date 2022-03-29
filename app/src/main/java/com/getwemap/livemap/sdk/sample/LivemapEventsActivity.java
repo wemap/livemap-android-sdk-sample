@@ -17,7 +17,7 @@ import com.getwemap.livemap.sdk.model.Query;
 
 import java.util.List;
 
-public class EventsActivity extends Activity implements OnLivemapReadyCallback {
+public class LivemapEventsActivity extends Activity implements OnLivemapReadyCallback {
 
     private LivemapView mLivemapView;
     protected Logger mLogger;
@@ -35,12 +35,21 @@ public class EventsActivity extends Activity implements OnLivemapReadyCallback {
 
     @Override
     public void onLivemapReady(Livemap livemap) {
-        
+
         livemap.addPinpointOpenListener(pinpoint -> mLogger.log("Pinpoint open: " + pinpoint.getId()));
         livemap.addPinpointCloseListener(() -> mLogger.log("Pinpoint close"));
 
         livemap.addEventOpenListener(event -> mLogger.log("Event open: " + event.getId()));
         livemap.addEventCloseListener(() -> mLogger.log("Event close"));
+
+        livemap.addListOpenListener(list -> mLogger.log("List open: " + list.id));
+        livemap.addListCloseListener(() -> mLogger.log("List close"));
+
+        livemap.addMultipointOpenListener((pos, pp, events) ->
+                mLogger.log("Multipoint open: " + pos
+                        + " (pp: " + pp.length + ", events:" + events.length + ")")
+        );
+        livemap.addMultipointCloseListener(() -> mLogger.log("Multipoint close"));
 
         livemap.addMapClickListener(point -> mLogger.log("Map click: " + point.toString()));
         livemap.addMapLongClickListener(point -> mLogger.log("Map long click: " + point.toString()));
@@ -71,6 +80,9 @@ public class EventsActivity extends Activity implements OnLivemapReadyCallback {
                 mLogger.log("On Events Updated (" + events.size() + "), query: " + query.toString());
             }
         });
+
+        livemap.addFullscreenEnterListener(() -> mLogger.log("enter fullscreen"));
+        livemap.addFullscreenExitListener(() -> mLogger.log("exit fullscreen"));
     }
 
 
