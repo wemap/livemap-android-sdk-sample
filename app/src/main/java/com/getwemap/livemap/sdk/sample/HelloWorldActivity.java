@@ -9,7 +9,7 @@ import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
 
-public class LivemapSampleActivity extends Activity implements OnLivemapReadyCallback {
+public class HelloWorldActivity extends Activity implements OnLivemapReadyCallback {
 
     private LivemapView mLivemapView;
     protected Logger mLogger;
