@@ -116,6 +116,18 @@ public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCa
         // // Fit the map on given bounds.
         // livemap.fitBounds(new BoundingBox(0, 43, 10, 48));
 
+        // // Get User/Device position / attitude
+        // new Handler().postDelayed(
+        //         () -> livemap.getUserLocation(l -> mLogger.log("UserLocation: " + l)),
+        //         5000);
+        // new Handler().postDelayed(
+        //         () -> livemap.getDeviceAttitude(att -> mLogger.log("Device attitude: " + att)),
+        //         5000);
+
+        // // Use custom User/Device position / attitude
+        // livemap.disablePositioningSystem();
+        // livemap.setUserLocation(new UserLocation(43.609395, 3.884215, null, 50));
+        // livemap.setDeviceAttitude(new Attitude(new float[]{1, 0, 0, 0}));
     }
 }
 

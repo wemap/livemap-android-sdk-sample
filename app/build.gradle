@@ -5,7 +5,7 @@ android {
     buildToolsVersion "32.1.0-rc1"
     defaultConfig {
         applicationId "com.getwemap.livemap.sdk.sample"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['commons.aar', 'livemap-sdk.aar', 'providers.aar'])
+    implementation 'com.getwemap:livemap-sdk:1.12.1'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 }
