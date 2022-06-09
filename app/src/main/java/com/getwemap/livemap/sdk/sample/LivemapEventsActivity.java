@@ -8,16 +8,16 @@ import androidx.annotation.NonNull;
 
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
-import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
-import com.getwemap.livemap.sdk.callbacks.ActionButtonClickListener;
-import com.getwemap.livemap.sdk.callbacks.ContentUpdatedListener;
+import com.getwemap.livemap.sdk.callback.LivemapReadyCallback;
+import com.getwemap.livemap.sdk.listener.ActionButtonClickListener;
+import com.getwemap.livemap.sdk.listener.ContentUpdatedListener;
 import com.getwemap.livemap.sdk.model.Event;
 import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.getwemap.livemap.sdk.model.Query;
 
 import java.util.List;
 
-public class LivemapEventsActivity extends Activity implements OnLivemapReadyCallback {
+public class LivemapEventsActivity extends Activity implements LivemapReadyCallback {
 
     private LivemapView mLivemapView;
     protected Logger mLogger;
@@ -53,8 +53,8 @@ public class LivemapEventsActivity extends Activity implements OnLivemapReadyCal
 
         livemap.addMapClickListener(point -> mLogger.log("Map click: " + point.toString()));
         livemap.addMapLongClickListener(point -> mLogger.log("Map long click: " + point.toString()));
-        livemap.addMapMovedListener(mapMoved -> {
-            mLogger.log(mapMoved.toString());
+        livemap.addMapMovedListener((zoom, bounds, point) -> {
+            mLogger.log("Map moved: zoom:" + zoom + ", bounds: " + bounds + ", point: " + point);
         });
 
         livemap.addActionButtonClickedListener(new ActionButtonClickListener() {

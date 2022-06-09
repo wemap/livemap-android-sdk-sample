@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
-import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
-import com.getwemap.livemap.sdk.model.LatLngAlt;
-import com.getwemap.livemap.sdk.model.PolylineOptions;
+import com.getwemap.livemap.sdk.callback.LivemapReadyCallback;
+import com.getwemap.livemap.sdk.model.Coordinates;
+import com.getwemap.livemap.sdk.options.PolylineOptions;
 
 import java.util.Arrays;
 
 
-public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCallback {
+public class LivemapMethodsActivity extends Activity implements LivemapReadyCallback {
 
     private LivemapView mLivemapView;
     private Logger mLogger;
@@ -49,7 +49,7 @@ public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCa
 
         // Center the map to a specific location and zoom
         new Handler().postDelayed(() -> livemap.centerTo(
-                new LatLngAlt(43.609395, 3.884215), 5),
+                new Coordinates(43.609395, 3.884215), 5),
                 3000
         );
 
@@ -68,10 +68,27 @@ public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCa
 
         // Draw a polyline
         livemap.drawPolyline(
-                Arrays.asList(new LatLngAlt(35, -30), new LatLngAlt(45, 4)),
+                Arrays.asList(new Coordinates(35, -30), new Coordinates(45, 4)),
                 new PolylineOptions(),
                 id -> new Handler().postDelayed(() -> livemap.removePolyline(id), 10000)
         );
+
+        // // Add custom pinpoints
+        // livemap.setPinpoints(
+        //         Arrays.asList(
+        //                 new Pinpoint(0, "Foo", new Coordinates(45, 5)),
+        //                 new Pinpoint(1, "Foobar", new Coordinates(46, 3))
+        //         ),
+        //         boundingBox -> mLogger.log("pinpoints added [bounds: " + boundingBox + "]")
+        // );
+
+        // // Add custom events
+        // EventDate[] dates = new EventDate[]{
+        //         new EventDate("2018-09-15T08:00:00.000Z", "2018-09-16T08:00:00.000Z")
+        // };
+        // Pinpoint pinpoint = new Pinpoint(2, "Wemap Office", new Coordinates(43.609138, 3.884193));
+        // livemap.setEvents(Collections.singletonList(new Event(1, "Event", pinpoint, dates)),
+        //         boundingBox -> mLogger.log("events added [bounds: " + boundingBox + "]"));
 
         // // Filtering the contents
         // livemap.setFilters(new Filters(
@@ -101,7 +118,7 @@ public class LivemapMethodsActivity extends Activity implements OnLivemapReadyCa
 
         // // Find the nearest pinpoints from a point.
         // livemap.findNearestPinpoints(
-        //         new LatLngAlt(45, 4),
+        //         new Coordinates(45, 4),
         //         pinpoints -> mLogger.log("Nearest pinpoints: " + Arrays.toString(pinpoints))
         // );
 
