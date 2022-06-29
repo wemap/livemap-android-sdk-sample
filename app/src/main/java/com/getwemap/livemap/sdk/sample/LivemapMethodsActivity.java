@@ -73,6 +73,17 @@ public class LivemapMethodsActivity extends Activity implements LivemapReadyCall
                 id -> new Handler().postDelayed(() -> livemap.removePolyline(id), 10000)
         );
 
+
+        // // Add custom marker
+        // livemap.addMarker(
+        //        new Marker(
+        //                new Coordinates(43.609138, 3.884193),
+        //                "https://1.bp.blogspot.com/_2IU2Nt4rD1k/S7NYdiVpUeI/AAAAAAAABRY/YWJbdCPlllI/s400/Eiffel_Tower.JPG",
+        //                "Eiffel Tower"
+        //        ),
+        //        id -> new Handler().postDelayed(() -> livemap.removeMarker(id), 10000)
+        // );
+
         // // Add custom pinpoints
         // livemap.setPinpoints(
         //         Arrays.asList(

@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
-import com.getwemap.livemap.sdk.LivemapOptions;
 import com.getwemap.livemap.sdk.LivemapView;
+import com.getwemap.livemap.sdk.options.LivemapOptions;
 
 public class ProgrammaticallyViewActivity extends Activity {
 
