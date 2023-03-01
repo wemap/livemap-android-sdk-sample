@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:wemap="http://schemas.android.com/apk/res-auto"
+    tools:context=".PositioningSdkActivity">
+
+    <com.getwemap.livemap.sdkpositioning.LivemapPositioningView
+        android:id="@+id/livemap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        wemap:emmid="22425"
+        wemap:webapp_endpoint="https://livemapdev.maaap.it" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Start" />
+
+</merge>

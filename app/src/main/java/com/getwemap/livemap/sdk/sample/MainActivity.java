@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
             new ActivityNamed("Hello World Programmatically", ProgrammaticallyViewActivity.class),
             new ActivityNamed("Livemap Methods", LivemapMethodsActivity.class),
             new ActivityNamed("Livemap Events", LivemapEventsActivity.class),
+            new ActivityNamed("Positioning SDK", PositioningSdkActivity.class),
     };
 
 
