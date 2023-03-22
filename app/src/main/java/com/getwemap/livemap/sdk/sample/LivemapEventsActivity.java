@@ -15,6 +15,7 @@ import com.getwemap.livemap.sdk.model.Event;
 import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.getwemap.livemap.sdk.model.Query;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LivemapEventsActivity extends Activity implements LivemapReadyCallback {
@@ -83,6 +84,8 @@ public class LivemapEventsActivity extends Activity implements LivemapReadyCallb
 
         livemap.addFullscreenEnterListener(() -> mLogger.log("enter fullscreen"));
         livemap.addFullscreenExitListener(() -> mLogger.log("exit fullscreen"));
+
+        livemap.addPermissionsDeniedListener((permissions) -> mLogger.log("Permissions denied: " + Arrays.toString(permissions)));
     }
 
 

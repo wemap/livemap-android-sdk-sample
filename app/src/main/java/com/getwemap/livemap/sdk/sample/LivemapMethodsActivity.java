@@ -156,6 +156,8 @@ public class LivemapMethodsActivity extends Activity implements LivemapReadyCall
         // livemap.disablePositioningSystem();
         // livemap.setUserLocation(new UserLocation(43.609395, 3.884215, null, 50));
         // livemap.setDeviceAttitude(new Attitude(new float[]{1, 0, 0, 0}));
+
+        // livemap.highlightPinpoints(new int[]{46089981});
     }
 }
 
